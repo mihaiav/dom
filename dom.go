@@ -308,7 +308,7 @@ func OuterHTML(node *html.Node) string {
 	}
 
 	var buffer bytes.Buffer
-	err := html.Render(&buffer, node)
+	err := html.Render(&buffer, node, func(*html.Node){})
 	if err != nil {
 		return ""
 	}
@@ -327,7 +327,7 @@ func InnerHTML(node *html.Node) string {
 	}
 
 	for child := node.FirstChild; child != nil; child = child.NextSibling {
-		err = html.Render(&buffer, child)
+		err = html.Render(&buffer, child, func(*html.Node){})
 		if err != nil {
 			return ""
 		}
